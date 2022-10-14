@@ -1,51 +1,38 @@
-import React from 'react';
-import Button  from 'components/Button/Button';
 import styles from './FeedbackOptions.module.css';
+import { Button } from 'components/Button/Button';
 import goodImg from '../../images/good.png';
 import neutralImg from '../../images/neutral.png';
 import badImg from '../../images/bad.png';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class FeedbackOptions extends React.Component {
-    
-    render() {
-        const {btnWrapper} = styles;
-        const { options, onLeaveFeedback } = this.props;
-        return (
-            <>
-                <div className={btnWrapper}>
-                    <Button
-                        title={options[0]}
-                        img={goodImg}
-                        onClick={() => {
-                            console.log('good')
-                            onLeaveFeedback(options[0]);
-                        }}
-                    >
-                    </Button>
-                    <Button
-                        title={options[1]}
-                        img={neutralImg}
-                        onClick={() => {
-                            console.log('neutral')
-                            onLeaveFeedback(options[1]);
-                        }}
-                    >
-                    </Button>
-                    <Button
-                        title={options[2]}
-                        img={badImg}
-                        onClick={() => {
-                            console.log('bad')
-                            onLeaveFeedback(options[2]);
-                        }}
-                    >
-                    </Button>
-                </div>
-            </>
-        );
-    }
-}
+const FeedbackOptions = ({options, onLeaveFeedback}) => {
+
+  const { btnWrapper } = styles;
+
+  const btnImages = [goodImg, neutralImg, badImg];
+
+  return (
+    <div className={btnWrapper}>
+      {options.map((option,i) => (
+        <Button key={option}
+          title={option}
+          img={btnImages[i]}
+          onClick={() => {
+            onLeaveFeedback(option);
+          }}
+        ></Button>
+      ))}
+    </div>
+  );
+};
+
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.array.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
+
 
 export default FeedbackOptions;
 

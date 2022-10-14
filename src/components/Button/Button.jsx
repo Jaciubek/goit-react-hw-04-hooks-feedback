@@ -12,7 +12,6 @@ export const Button = ({ img, title,onClick }) => {
   );
 };
 
-export default Button
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,
